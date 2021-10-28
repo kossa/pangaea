@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class TopicFactory extends Factory
+class ServerFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -14,7 +14,7 @@ class TopicFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->unique()->word(),
+            'url' => $this->faker->unique()->url(),
         ];
     }
 }

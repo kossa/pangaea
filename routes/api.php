@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\SubscriptionController;
+use App\Http\Controllers\Api\PublishController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,3 +16,5 @@ use App\Http\Controllers\Api\SubscriptionController;
 |
 */
 Route::post('subscribe/{topic_name}', [SubscriptionController::class, 'subscribe']);
+
+Route::post('publish/{topic_name}', [PublishController::class, 'publish']);
