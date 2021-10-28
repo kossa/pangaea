@@ -3,9 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\PublishMessageToTopic;
 use App\Models\Topic;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
 
 class PublishController extends Controller
 {
@@ -14,10 +13,16 @@ class PublishController extends Controller
         $topic = Topic::where('name', $topic_name)->firstOrFail();
 
         foreach ($topic->servers as $server) {
-            Http::post($server->url, [
-                'topic' => $topic_name,
-                'data' => request()->all(),
-            ]);
+            PublishMessageToTopic::dispatch(
+                $server,
+                $topic,
+                request()->all()
+            );
         }
+
+        return response()->json([
+            'topic' => $topic->name,
+            'data' => request()->all(),
+        ]);
     }
 }
