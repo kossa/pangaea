@@ -20,7 +20,7 @@ class SubscriptionController extends Controller
             'name' => $topic_name,
         ]);
 
-        $server->topics()->attach($topic);
+        $server->topics()->sync($topic);
 
         return response()->json([
             'url'   => $server->url,
